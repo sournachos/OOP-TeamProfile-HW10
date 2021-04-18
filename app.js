@@ -13,6 +13,48 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+const mainQs = inquirer.prompt([
+    {type:'input', message:"Enter Your Team Manager's Name:", name:'managerName'},
+        {type:'number', message:"Enter Your Team Manager's Employee ID:", name:'managerId'},
+            {type:'input', message:"Enter Your Team Manager's Email:", name:'managerEmail'},
+                {type:'input', message:"Enter Your Team Manager's Office Number:", name:'managerOfficeNumber'},
+])
+
+const addEngOrInt = inquire.prompt([{type:'checkbox', message:'Do you want to add a Team Engineer or Team Intern?', choices:['Engineer', 'Intern', 'No Thanks, I Am Finished Building My Team ;)'], name:'EngOrInt'}])
+
+const IfAddEng = inquirer.prompt([
+    {type:'input', message:"Enter Your Team Engineer's Name:", name:'EngName'},
+        {type:'number', message:"Enter Your Team Engineer's Employee ID:", name:'EngId'},
+            {type:'input', message:"Enter Your Team Engineer's Email:", name:'EngEmail'},
+                {type:'input', message:"Enter Your Team Engineer's Github Username:", name:'EngGit'}
+])
+
+const IfAddInt = inquirer.prompt([
+    {type:'input', message:"Enter Your Team Intern's Name:", name:'IntName'},
+        {type:'number', message:"Enter Your Team Intern's Employee ID:", name:'IntId'},
+            {type:'input', message:"Enter Your Team Intern's Email:", name:'IntEmail'},
+                {type:'input', message:"Enter Your Team Intern's School Name:", name:'IntSchool'}
+])
+
+
+//Different Maybes/Possibilities
+(addEngOrInt.choices === 'Engineer') ? inquirer.prompt(IfAddEng) 
+
+displayQuestions(){} 
+
+var prompt = inquirer.createPromptModule();
+prompt(questions).then(/* ... */);
+
+
+
+
+
+
+
+
+
+
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
