@@ -1,56 +1,70 @@
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
+const manager = require("./lib/Manager");
+// const Engineer = require("./lib/Engineer");
+// const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
-const path = require("path");
+// const path = require("path");
 const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+// const OUTPUT_DIR = path.resolve(__dirname, "output");
+// const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./lib/htmlRenderer");
+// const render = require("./lib/htmlRenderer");
 
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-const mainQs = inquirer.prompt([
+function mainQs(){ inquirer.prompt([
     {type:'input', message:"Enter Your Team Manager's Name:", name:'managerName'},
         {type:'number', message:"Enter Your Team Manager's Employee ID:", name:'managerId'},
             {type:'input', message:"Enter Your Team Manager's Email:", name:'managerEmail'},
                 {type:'input', message:"Enter Your Team Manager's Office Number:", name:'managerOfficeNumber'},
-])
+]).then((res)=> {
+        //const managerAnswers = [res.managerName, res.managerId, res.managerEmail, res.managerOfficeNumber]
+        const managerHtml = `<div class="team-area mx-2 my-4 w-30 bg-secondary text-light text-center rounded-lg">
+${res.managerName} <br> <strong>Manager</strong> <br>
+<table class="table table-dark table-hover">
+<tr><td>ID: ${res.managerId}</td></tr><br>
+<tr><td>Email: <a href="mailto:${res.managerEmail}">${res.managerEmail}</a></td></tr>
+<tr><td>Office Number: ${res.managerOfficeNumber}</td></tr>
+</table>
+</div>`
+        // fs.readFile('templates\main.html',(err)=>{console.error(err)})
+        fs.appendFile('templates/main.html', managerHtml, (err)=>{console.error(err)})
+        // const teamMembers = document.getElementById("teamMembers")
+        // teamMembers.appendChild(manager(managerAnswers))
 
-const addEngOrInt = inquire.prompt([{type:'checkbox', message:'Do you want to add a Team Engineer or Team Intern?', choices:['Engineer', 'Intern', 'No Thanks, I Am Finished Building My Team ;)'], name:'EngOrInt'}])
+})}
 
-const IfAddEng = inquirer.prompt([
-    {type:'input', message:"Enter Your Team Engineer's Name:", name:'EngName'},
-        {type:'number', message:"Enter Your Team Engineer's Employee ID:", name:'EngId'},
-            {type:'input', message:"Enter Your Team Engineer's Email:", name:'EngEmail'},
-                {type:'input', message:"Enter Your Team Engineer's Github Username:", name:'EngGit'}
-])
+function addEngOrInt(){ inquire.prompt([{type:'checkbox', message:'Do you want to add a Team Engineer or Team Intern?', choices:['Engineer', 'Intern', 'No Thanks, I Am Finished Building My Team ;)'], name:'EngOrInt'}])}
 
-const IfAddInt = inquirer.prompt([
-    {type:'input', message:"Enter Your Team Intern's Name:", name:'IntName'},
-        {type:'number', message:"Enter Your Team Intern's Employee ID:", name:'IntId'},
-            {type:'input', message:"Enter Your Team Intern's Email:", name:'IntEmail'},
-                {type:'input', message:"Enter Your Team Intern's School Name:", name:'IntSchool'}
-])
+function IfAddEng(){ inquirer.prompt([
+    {type:'input', message:"Enter Your Team Engineer's Name:", name:'engName'},
+        {type:'number', message:"Enter Your Team Engineer's Employee ID:", name:'engId'},
+            {type:'input', message:"Enter Your Team Engineer's Email:", name:'engEmail'},
+                {type:'input', message:"Enter Your Team Engineer's Github Username:", name:'engGit'}
+])}
+
+function IfAddInt(){ inquirer.prompt([
+    {type:'input', message:"Enter Your Team Intern's Name:", name:'intName'},
+        {type:'number', message:"Enter Your Team Intern's Employee ID:", name:'intId'},
+            {type:'input', message:"Enter Your Team Intern's Email:", name:'intEmail'},
+                {type:'input', message:"Enter Your Team Intern's School Name:", name:'intSchool'}
+])}
 
 
 //Different Maybes/Possibilities
-(addEngOrInt.choices === 'Engineer') ? inquirer.prompt(IfAddEng) 
+// (addEngOrInt.choices === 'Engineer') ? inquirer.prompt(IfAddEng) :  
 
-displayQuestions(){} 
-
-var prompt = inquirer.createPromptModule();
-prompt(questions).then(/* ... */);
-
+function init(){
+    mainQs()
+}
 
 
 
 
 
 
+init()
 
 
 
