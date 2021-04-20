@@ -1,5 +1,5 @@
 # OOP-TeamProfile-HW10 ![NPM](https://img.shields.io/npm/l/inquirer?style=plastic)
-  This project facilitates the creation of your own HTML file to show some information about the members of your team using Node.JS ***Currently not working***
+  This project facilitates the creation of your own HTML file to show some information about the members of your team using Node.JS <br> ***Currently not working***
   <br>
 ## Sample Page<br>
 ![Caption](img\demo.PNG)
