@@ -1,18 +1,7 @@
-// const manager = require("./lib/Manager");
-// const Engineer = require("./lib/Engineer");
-// const Intern = require("./lib/Intern");
-const inquirer = require("inquirer");
-// const path = require("path");
-const fs = require("fs");
+const inquirer = require("inquirer");//Node library use to take in user input
+const fs = require("fs");//Standard Node library to interact with other files
 
-// const OUTPUT_DIR = path.resolve(__dirname, "output");
-// const outputPath = path.join(OUTPUT_DIR, "team.html");
-
-// const render = require("./lib/htmlRenderer");
-
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+// Asking user for the team's manager info
 function mainQs(){ inquirer.prompt([
     {type:'input', message:"Enter Your Team Manager's Name:", name:'managerName'},
         {type:'number', message:"Enter Your Team Manager's Employee ID:", name:'managerId'},
@@ -30,12 +19,10 @@ function mainQs(){ inquirer.prompt([
         fs.appendFile('templates/main.html', managerHtml, (err)=>{console.error(err)})
 })}
 
-
-
+//Ask user if they want to add an engineer or an intern
 function addEngOrInt(){ inquire.prompt([{type:'checkbox', message:'Do you want to add a Team Engineer or Team Intern?', choices:['Engineer', 'Intern', 'No Thanks, I Am Finished Building My Team ;)'], name:'EngOrIntChoice'}])}
 
-
-
+//Function if user wants to add an Engineer
 function AddEng(){ inquirer.prompt([
     {type:'input', message:"Enter Your Team Engineer's Name:", name:'engName'},
         {type:'number', message:"Enter Your Team Engineer's Employee ID:", name:'engId'},
@@ -54,6 +41,7 @@ function AddEng(){ inquirer.prompt([
         fs.appendFile('templates/main.html', engineerHtml, (err)=>{console.error(err)})
 })}
 
+//Function if user wants to add an Intern 
 function AddInt(){ inquirer.prompt([
     {type:'input', message:"Enter Your Team Intern's Name:", name:'intName'},
         {type:'number', message:"Enter Your Team Intern's Employee ID:", name:'intId'},
@@ -72,34 +60,20 @@ function AddInt(){ inquirer.prompt([
         fs.appendFile('templates/main.html', internHtml, (err)=>{console.error(err)})
 })}
 
+//Closing tags to append to main.html after all the employee cards have been appended to main.html
+const closeHtml = `</div></div></body></html>`
 
-//Function to (init)ialize all the code in the desired order
+//Function to (init)ialize all the code above in the desired order
+// ***Pending to fix. Issue lies below***
 function init(){
     mainQs()
     addEngOrInt()
     if(res.EngOrIntChoice === 'Engineer'){(AddEng()).then(addEngOrInt())}
     else if(res.EngOrIntChoice === 'Intern'){(AddInt()).then(addEngOrInt())}
-    else{console.log('Your team page has been created. Take a look at main.html to check it out.')}
+    else{
+        fs.appendFile('templates/main.html', closeHtml, (err)=>{console.error(err)})
+        console.log('Your team page has been created. Take a look at main.html to check it out.')}
 }
 
+
 init() //Calls the function above to run
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
