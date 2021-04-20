@@ -2,7 +2,7 @@
   This project facilitates the creation of your own HTML file to show some information about the members of your team using Node.JS
   <br>
 ## Sample Page<br>
-[!Caption](./img/demo.png)
+![Caption](/img/demo.png)
 
  ## Table of Contents:
  * [Installation](#installation)
